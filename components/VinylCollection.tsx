@@ -36,7 +36,7 @@ export default function VinylCollection({ vinyls }: VinylCollectionProps) {
   return (
     <VStack spacing={4} margin="30px">
       <Input
-        width="100%"
+        width="60%"
         placeholder="Search by artist, album, genre, or year"
         background={"white"}
         color={"black"}
@@ -52,6 +52,7 @@ export default function VinylCollection({ vinyls }: VinylCollectionProps) {
             artist={vinyl.artist}
             album={vinyl.album}
             year={String(vinyl.year)}
+            genre={vinyl.genre}
             imageUrl={vinyl.artworkPath}
             timesPlayed={vinyl.timesPlayed}
             lastPlayed={
