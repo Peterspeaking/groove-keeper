@@ -27,7 +27,9 @@ export default function HeroVinyl({
       mx="auto"
       my={8}
     >
-      <Heading color="#3F70C0" fontSize="50px" mb={6}>Daily Recommended Spin</Heading>
+      <Heading color="#3F70C0" fontSize="50px" mb={6}>
+        Daily Recommended Spin
+      </Heading>
       <Image
         src={imageUrl}
         alt={`${album} cover`}

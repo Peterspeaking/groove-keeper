@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Box,
   Image,
@@ -6,9 +9,12 @@ import {
   Badge,
   Spacer,
   VStack,
+  IconButton,
 } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 
 interface VinylCardProps {
+  id: number;
   artist: string;
   album: string;
   year: string;
@@ -18,6 +24,7 @@ interface VinylCardProps {
 }
 
 export default function VinylCard({
+  id,
   artist,
   album,
   year,
@@ -25,12 +32,40 @@ export default function VinylCard({
   timesPlayed = 0,
   lastPlayed,
 }: VinylCardProps) {
-  const formattedLastPlayed = lastPlayed
-    ? `Last played on ${new Date(lastPlayed).toLocaleDateString()}`
+  const [playCount, setPlayCount] = useState<number>(timesPlayed);
+  const [lastPlayedState, setLastPlayedState] = useState<string | undefined>(
+    lastPlayed
+  );
+
+  const formattedLastPlayed = lastPlayedState
+    ? `Last played on ${new Date(lastPlayedState).toLocaleDateString()}`
     : "Never played";
+
+  const handlePlay = async () => {
+    try {
+      const response = await fetch("/api/update-play", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ vinylId: id }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        // Update local state with the returned vinyl record
+        setPlayCount(data.vinyl.timesPlayed);
+        setLastPlayedState(data.vinyl.lastPlayed);
+      } else {
+        console.error("Failed to update play count:", data.error);
+      }
+    } catch (error) {
+      console.error("Error updating play:", error);
+    }
+  };
 
   return (
     <Box
+      position="relative"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
@@ -51,7 +86,7 @@ export default function VinylCard({
           mr={4}
         />
 
-        <VStack align="flex-start" spacing={2}>
+        <VStack align="flex-start" spacing={2} flex="1">
           <Text
             fontSize="lg"
             fontWeight="bold"
@@ -67,15 +102,22 @@ export default function VinylCard({
             {year}
           </Text>
           <Spacer />
-
           <Flex mt={2} paddingBottom="10px">
             <Badge colorScheme="green" mr={2}>
-              Played {timesPlayed} {timesPlayed === 1 ? "time" : "times"}
+              Played {playCount} {playCount === 1 ? "time" : "times"}
             </Badge>
             <Badge colorScheme="blue">{formattedLastPlayed}</Badge>
           </Flex>
         </VStack>
       </Flex>
+      <IconButton
+        aria-label="Increment play count"
+        icon={<AddIcon />}
+        onClick={handlePlay}
+        position="absolute"
+        bottom="10px"
+        right="10px"
+      />
     </Box>
   );
 }

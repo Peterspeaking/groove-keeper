@@ -1,4 +1,5 @@
 "use client";
+
 import HeroVinyl from "@/components/HeroVinyl";
 import {
   Box,
@@ -7,15 +8,22 @@ import {
   Center,
   HStack,
   Heading,
-  Link,
-  Button,
+  Spinner,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export default function Home() {
   const router = useRouter();
+  const { data } = useSWR("/api/random-vinyl", fetcher);
+
   const handleCollection = () => {
     router.push("/collection");
   };
+
+  const heroVinyl = data?.vinyl;
 
   return (
     <Center>
@@ -32,12 +40,18 @@ export default function Home() {
           <Heading>Mood</Heading>
         </HStack>
         <Box w="full" borderRadius="20px" opacity="82%">
-          <HeroVinyl
-            artist="Pink Floyd"
-            album="The Dark Side of the Moon"
-            year="1973"
-            imageUrl="/uploads/dark-side-of-the-moon.png"
-          />
+          {heroVinyl ? (
+            <HeroVinyl
+              artist={heroVinyl.artist}
+              album={heroVinyl.album}
+              year={String(heroVinyl.year)}
+              imageUrl={heroVinyl.artworkPath || "/default-artwork.png"}
+            />
+          ) : (
+            <Center>
+              <Spinner />
+            </Center>
+          )}
         </Box>
       </VStack>
     </Center>
