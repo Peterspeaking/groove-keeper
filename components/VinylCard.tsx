@@ -18,6 +18,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  Spacer,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
@@ -114,9 +115,7 @@ export default function VinylCard({
             <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
               {year}
             </Text>
-            <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
-              {genre}
-            </Text>
+            <Spacer />
             <Flex mt={2}>
               <Badge colorScheme="green" mr={2}>
                 Played {playCount} {playCount === 1 ? "time" : "times"}
