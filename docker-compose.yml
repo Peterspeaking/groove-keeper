@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres
+    container_name: vinyl_db
+    environment:
+      POSTGRES_USER: vinyl_user
+      POSTGRES_PASSWORD: vinyl_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - vinyl_net
+
+  # Example: a backend service
+  # backend:
+  #   build:
+  #     context: ./backend
+  #   container_name: vinyl_backend
+  #   ports:
+  #     - "3001:3001"
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - vinyl_net
+
+  # Example: a frontend service
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   container_name: vinyl_frontend
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - vinyl_net
+
+volumes:
+  db-data:
+
+networks:
+  vinyl_net:
+    driver: bridge

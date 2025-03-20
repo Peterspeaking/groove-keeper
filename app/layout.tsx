@@ -2,6 +2,8 @@ import { Providers } from './providers'
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Box, Button } from '@chakra-ui/react';
+import AddButton from '@/components/AddButton';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           <Providers>
+            <AddButton />
             {children}
           </Providers>
         </body>

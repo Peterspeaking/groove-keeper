@@ -13,6 +13,8 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@prisma/client": "^6.5.0",
+    "@tanstack/react-query": "^5.63.0",
     "framer-motion": "^11.5.4",
     "next": "14.2.12",
     "react": "^18",
@@ -24,6 +26,13 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.12",
+    "prisma": "^6.5.0",
+    "ts-node": "^10.9.2",
+    "ts-node-esm": "^0.0.6",
+    "tsx": "^4.19.3",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "tsx prisma\\seed.ts"
   }
 }

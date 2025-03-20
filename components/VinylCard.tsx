@@ -1,5 +1,3 @@
-// components/VinylCard.tsx
-
 import { Box, Image, Text, Flex } from "@chakra-ui/react";
 
 interface VinylCardProps {

@@ -1,10 +1,16 @@
-// app/theme.ts
 import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
   fonts: {
-    heading: "'BoecklinsUniverse', sans-serif", // For headings
-    body: "'BoecklinsUniverse', sans-serif",    // For body text
+    heading: "'BoecklinsUniverse', sans-serif",
+    body: "'BoecklinsUniverse', sans-serif",
+  },
+  components: {
+    Input: {
+      baseStyle: {
+        fontFamily: "'BoecklinsUniverse', sans-serif",
+      },
+    },
   },
 });
 
