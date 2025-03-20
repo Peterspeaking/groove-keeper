@@ -1,6 +1,6 @@
 import VinylCard from "@/components/VinylCard";
 import { prisma } from "@/lib/db";
-import { Box, Heading, VStack, Text } from "@chakra-ui/react";
+import { Box, Heading, VStack } from "@chakra-ui/react";
 import { Key } from "react";
 
 export default async function CollectionPage() {
@@ -13,13 +13,15 @@ export default async function CollectionPage() {
       </Heading>
 
       <VStack spacing={6} align="center">
-        {vinyls?.map((vinyl: { id: Key | null | undefined; artist: string; album: string; year: any; imageUrl: string; }) => (
+        {vinyls?.map((vinyl: { id: Key | null | undefined; artist: string; album: string; year: number; artworkPath: string; timesPlayed: number; lastPlayed: { toString: () => string; }; }) => (
           <VinylCard
             key={vinyl.id}
             artist={vinyl.artist}
             album={vinyl.album}
             year={String(vinyl.year)}
-            imageUrl={vinyl.imageUrl}
+            imageUrl={vinyl.artworkPath}
+            timesPlayed={vinyl.timesPlayed ?? 0}
+            lastPlayed={vinyl.lastPlayed ? vinyl.lastPlayed.toString() : undefined}
           />
         ))}
       </VStack>

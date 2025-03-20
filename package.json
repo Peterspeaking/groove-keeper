@@ -17,20 +17,20 @@
     "@tanstack/react-query": "^5.63.0",
     "framer-motion": "^11.5.4",
     "next": "14.2.12",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
+    "@types/node": "^20.16.5",
+    "@types/react": "^18.3.7",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.1",
     "eslint-config-next": "14.2.12",
     "prisma": "^6.5.0",
     "ts-node": "^10.9.2",
     "ts-node-esm": "^0.0.6",
     "tsx": "^4.19.3",
-    "typescript": "^5"
+    "typescript": "^5.6.2"
   },
   "prisma": {
     "seed": "tsx prisma\\seed.ts"

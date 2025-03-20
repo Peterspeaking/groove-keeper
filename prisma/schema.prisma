@@ -13,6 +13,7 @@ model Vinyl {
   album        String
   year         Int
   genre        String
+  artworkPath String?
   timesPlayed  Int? @default(0)
   lastPlayed   DateTime?
 }
